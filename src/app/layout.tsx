@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/app-sidebar";
 import NoteProvider from "@/providers/NoteProvider";
+import { Suspense } from "react";
 
 // Premium font - Inter for modern, clean typography
 const inter = Inter({
@@ -40,7 +41,9 @@ export default function RootLayout({
         >
           <NoteProvider>
             <SidebarProvider>
-              <AppSidebar />
+              <Suspense fallback={<div className="w-[var(--sidebar-width)] h-screen" />}>
+                <AppSidebar />
+              </Suspense>
 
               <div className="flex min-h-screen w-full flex-col">
                 <Header />

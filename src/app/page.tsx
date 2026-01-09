@@ -5,6 +5,7 @@ import NewNoteButton from "@/components/NewNoteButton";
 import AIMeetingButton from "@/components/AIMeetingButton";
 import NoteTextInput from "@/components/NoteTextInput";
 import { BookOpen, Sparkles } from "lucide-react";
+import { Suspense } from "react";
 
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -48,7 +49,9 @@ async function HomePage({ searchParams }: Props) {
       </div>
 
       {/* Note input area */}
-      <NoteTextInput noteId={noteId} startingNoteText={note?.text || ""} />
+      <Suspense fallback={<div className="w-full max-w-4xl h-96 animate-pulse bg-muted/20 rounded-2xl" />}>
+        <NoteTextInput noteId={noteId} startingNoteText={note?.text || ""} />
+      </Suspense>
 
       {/* Floating decorative element */}
       <div className="fixed bottom-8 right-8 pointer-events-none opacity-20">
